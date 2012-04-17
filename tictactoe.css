@@ -1,0 +1,26 @@
+/* 
+    Document   : tictactoe
+    Created on : Apr 17, 2012, 10:24:04 AM
+    Author     : fb
+    Description:
+        Style for TicTacToe game
+*/ 
+
+.tictactoe {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background: red;
+}
+
+.tictactoe tr {
+    width: 100%;
+    background: orange;
+}
+
+.tictactoe td {
+    width: 33%;
+    height: 33%;
+    background: yellow;
+    font-size: 3em;
+}
