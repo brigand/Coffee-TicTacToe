@@ -28,6 +28,7 @@
 .tictactoe td img {
     width: 75%;
     max-height: 90%;
-    vertical-align: central;
+    vertical-align: middle;
     margin: 0 auto;
+    display: block;
 }
