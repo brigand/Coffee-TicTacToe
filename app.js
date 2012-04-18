@@ -34,8 +34,8 @@
     };
 
     Player.prototype.hasWon = function() {
-      var e, marks, wins, _ref;
-      wins = [0x124, 0x92, 0x49, 0x111, 0x54, 0x1c0, 0x38, 0x38];
+      var any, e, marks, wins;
+      wins = [0x124, 0x92, 0x49, 0x111, 0x54, 0x1c0, 0x38, 0x3b];
       marks = ((function() {
         var _i, _len, _ref, _results;
         _ref = game.board.items;
@@ -46,11 +46,21 @@
         }
         return _results;
       }).call(this)).join('');
-      if (_ref = parseInt(marks, 2), __indexOf.call(wins, _ref) >= 0) {
-        return true;
-      } else {
-        return false;
-      }
+      any = function(inp) {
+        var x;
+        return __indexOf.call((function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = wins.length; _i < _len; _i++) {
+            x = wins[_i];
+            if ((inp & x) === x) {
+              _results.push(true);
+            }
+          }
+          return _results;
+        })(), true) >= 0;
+      };
+      return any(parseInt(marks, 2));
     };
 
     return Player;
@@ -119,7 +129,7 @@
     function TicTacToe() {
       this.turn = this.player1 = new Human('P1', buildIcon(3));
       this.nextTurn = this.player2 = new Human('P2', buildIcon(5));
-      this.board = new Board;
+      this.newGame();
     }
 
     TicTacToe.prototype.newGame = function() {

@@ -27,7 +27,7 @@ class Player
       0o124   # 001010100
       0o700   # 111000000
       0o70    # 000111000
-      0o70    # 000111000
+      0o73    # 000000111
     ]
 
     marks = ((
@@ -37,11 +37,11 @@ class Player
       ) for e in game.board.items)
       .join('')
     
-    if parseInt(marks, 2) in wins
-      true
-    else
-      false
+    # Returns true if any are matching
+    any = (inp) -> 
+      true in (true for x in wins when (inp & x) is x)
     
+    return any parseInt(marks, 2)
     
     
 class Human extends Player
@@ -75,12 +75,11 @@ class TicTacToe
   constructor: () ->
     @turn = @player1 = new Human 'P1', buildIcon(3)
     @nextTurn = @player2 = new Human 'P2', buildIcon(5)
-    @board = new Board
+    this.newGame()
     
   newGame: () ->
     @board = new Board
-    #$('.tictactoe td').each (e) -> $(e.target).html('')
-  
+    
   endTurn: () ->
     [@nextTurn, @turn] = [@turn, @nextTurn]
     
