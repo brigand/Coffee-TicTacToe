@@ -47,7 +47,9 @@
         return _results;
       }).call(this)).join('');
       if (_ref = parseInt(marks, 2), __indexOf.call(wins, _ref) >= 0) {
-        return alert("" + this.name + " wins!");
+        return true;
+      } else {
+        return false;
       }
     };
 
@@ -66,12 +68,10 @@
       this.name = name;
       this.icon = icon;
       $('.tictactoe td').click(function(e) {
-        var coords, item;
+        var c, delim, item, r, _ref;
         item = $(e.target);
-        coords = item.data('coord' || 'ERR');
-        if (coords !== 'ERR') {
-          return _this.move(coords[0], coords[2]);
-        }
+        _ref = item.data('coord'), r = _ref[0], delim = _ref[1], c = _ref[2];
+        return _this.move(r, c);
       });
     }
 
@@ -90,11 +90,22 @@
     Board.name = 'Board';
 
     function Board() {
-      var _this = this;
+      var e,
+        _this = this;
       this.items = [null, null, null, null, null, null, null, null, null];
       this.dom = $('.tictactoe td').each(function(e) {
         return e.target;
       });
+      console.log((function() {
+        var _i, _len, _ref, _results;
+        _ref = this.dom;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          e = _ref[_i];
+          _results.push($(e).html(" "));
+        }
+        return _results;
+      }).call(this));
     }
 
     return Board;
@@ -111,14 +122,19 @@
       this.board = new Board;
     }
 
-    TicTacToe.prototype.newGame = function() {};
+    TicTacToe.prototype.newGame = function() {
+      return this.board = new Board;
+    };
 
     TicTacToe.prototype.endTurn = function() {
       var _ref;
       return _ref = [this.turn, this.nextTurn], this.nextTurn = _ref[0], this.turn = _ref[1], _ref;
     };
 
-    TicTacToe.prototype.endGame = function(winner) {};
+    TicTacToe.prototype.endGame = function(winner) {
+      alert("" + winner.name + " wins!");
+      return this.newGame();
+    };
 
     return TicTacToe;
 

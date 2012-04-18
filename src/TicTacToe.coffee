@@ -38,7 +38,9 @@ class Player
       .join('')
     
     if parseInt(marks, 2) in wins
-      alert "#{@name} wins!"
+      true
+    else
+      false
     
     
     
@@ -66,6 +68,8 @@ class Board
     ]
     
     @dom = ($('.tictactoe td').each (e) => e.target)
+    
+    console.log ($(e).html(" ") for e in @dom)
   
 class TicTacToe
   constructor: () ->
@@ -74,11 +78,15 @@ class TicTacToe
     @board = new Board
     
   newGame: () ->
+    @board = new Board
+    #$('.tictactoe td').each (e) -> $(e.target).html('')
   
   endTurn: () ->
     [@nextTurn, @turn] = [@turn, @nextTurn]
     
   endGame: (winner) ->
+    alert "#{winner.name} wins!"
+    this.newGame()
     
 
 game = new TicTacToe
