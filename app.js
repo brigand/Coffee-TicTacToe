@@ -6,7 +6,7 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
   buildIcon = function(n) {
-    return "<img src='img/smile." + (parseInt(Math.random() * 18 + 1)) + ".jpg' alt='player icon'>";
+    return "<img src='img/smile." + (parseInt(Math.random() * 41 + 1)) + ".jpg' alt='player icon'>";
   };
 
   Player = (function() {
@@ -118,6 +118,22 @@
       }).call(this));
     }
 
+    Board.prototype.isFull = function() {
+      var x;
+      return __indexOf.call((function() {
+        var _i, _len, _ref, _results;
+        _ref = this.items;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          x = _ref[_i];
+          if (x === null) {
+            _results.push(true);
+          }
+        }
+        return _results;
+      }).call(this), true) < 0;
+    };
+
     return Board;
 
   })();
@@ -138,7 +154,12 @@
 
     TicTacToe.prototype.endTurn = function() {
       var _ref;
-      return _ref = [this.turn, this.nextTurn], this.nextTurn = _ref[0], this.turn = _ref[1], _ref;
+      _ref = [this.turn, this.nextTurn], this.nextTurn = _ref[0], this.turn = _ref[1];
+      if (this.board.isFull()) {
+        return this.endGame({
+          name: "nobody"
+        });
+      }
     };
 
     TicTacToe.prototype.endGame = function(winner) {

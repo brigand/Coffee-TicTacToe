@@ -70,6 +70,9 @@ class Board
     @dom = ($('.tictactoe td').each (e) => e.target)
     
     console.log ($(e).html(" ") for e in @dom)
+
+  isFull: () ->
+    true not in (true for x in @items when x is null)
   
 class TicTacToe
   constructor: () ->
@@ -82,6 +85,9 @@ class TicTacToe
     
   endTurn: () ->
     [@nextTurn, @turn] = [@turn, @nextTurn]
+    
+    # Check for any more moves
+    this.endGame({name: "nobody"}) if @board.isFull()
     
   endGame: (winner) ->
     alert "#{winner.name} wins!"
