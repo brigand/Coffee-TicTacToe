@@ -1,10 +1,14 @@
 fs     = require 'fs'
-{exec} = require 'child_process'
+{exec, spawn} = require 'child_process'
 
 appFiles  = [
   # omit src/ and .coffee to make the below lines a little shorter
-  'HelloWorld'
+  'Helpers'
+  'TicTacToe'
 ]
+task 'watch', 'Build the first source file, and watch it', ->
+  coffee = spawn 'coffee', ['-cw', '-o', 'app.coffee', '/src']
+  coffee.stdout.on 'data', (data) -> console.log data.toString().trim()
 
 task 'build', 'Build single application file from source files', ->
   appContents = new Array remaining = appFiles.length

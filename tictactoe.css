@@ -24,3 +24,11 @@
     background: yellow;
     font-size: 3em;
 }
+
+.tictactoe td img {
+    width: 75%;
+    max-height: 90%;
+    vertical-align: central;
+    margin: 0 auto;
+    
+}
