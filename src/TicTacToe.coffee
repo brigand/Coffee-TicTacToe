@@ -46,8 +46,8 @@ class Human extends Player
   constructor: (@name, @icon) ->
     $('.tictactoe td').click (e) =>
       item = $(e.target)
-      [r, delim, c] = item.data 'coord'
-      @move(r, c)
+      coords = item.data 'coord' or 'ERR'      
+      @move(coords[0], coords[2]) if coords isnt 'ERR'
   
   move: (r, c) ->
     if game.turn is this

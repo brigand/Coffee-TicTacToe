@@ -66,10 +66,12 @@
       this.name = name;
       this.icon = icon;
       $('.tictactoe td').click(function(e) {
-        var c, delim, item, r, _ref;
+        var coords, item;
         item = $(e.target);
-        _ref = item.data('coord'), r = _ref[0], delim = _ref[1], c = _ref[2];
-        return _this.move(r, c);
+        coords = item.data('coord' || 'ERR');
+        if (coords !== 'ERR') {
+          return _this.move(coords[0], coords[2]);
+        }
       });
     }
 
